@@ -5,6 +5,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.io.FileHandler;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
@@ -48,9 +49,8 @@ public class TC_RF_005 {
         BufferedImage expectedIMG = ImageIO.read( new File(System.getProperty("user.dir")+"/Screenshots/sc1Expected.png"));
 
         ImageDiffer imgDiffer = new ImageDiffer();
-        ImageDiff imgDifference = imgDiffer.makeDiff(expectedIMG,actualImg);
-        boolean b = imgDifference.hasDiff();
-        System.out.println(b);
+        ImageDiff imgDifference = imgDiffer.makeDiff(actualImg,expectedIMG);
+        Assert.assertTrue(imgDifference.hasDiff());
         driver.quit();
 
     }
